@@ -23,12 +23,28 @@
     "url": "https://github.com/Ucorp/ceres-backend/issues"
   },
   "homepage": "https://github.com/Ucorp/ceres-backend#readme",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".config/git/commitizen.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS -g .config/git/commitlint.js"
+    }
+  },
   "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "cz-customizable": "^6.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.2",
     "prettier": "^1.18.2"
   }
 }
