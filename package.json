@@ -8,7 +8,8 @@
     "dev": "nodemon src/server.js",
     "test": "jest",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "lint:fix": "eslint src/ --fix",
+    "postinstall": "cpy .env.example . --rename=.env"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
+    "cpy-cli": "^2.0.0",
     "cross-env": "^5.2.0",
     "cz-customizable": "^6.2.0",
     "eslint": "^5.16.0",
