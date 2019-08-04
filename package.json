@@ -8,7 +8,9 @@
     "dev": "nodemon src/server.js",
     "test": "jest",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "lint:fix": "eslint src/ --fix",
+    "init-env": "node scripts/init-env",
+    "postinstall": "npm run init-env"
   },
   "repository": {
     "type": "git",
