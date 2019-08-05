@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 services:
   app:
@@ -7,7 +7,7 @@ services:
     user: "node"
     working_dir: /home/node/app
     ports:
-      - "${PORT}:${PORT}"
+      - "${APP_PORT}:${APP_PORT}"
     volumes:
       - ./:/home/node/app
     command: "npm run dev"
@@ -15,16 +15,12 @@ services:
       - db
 
   db:
-    image: postgres:11-alpine
+    image: mariadb:10
     container_name: ceres-api-db-dev
     environment:
-      POSTGRES_DATABASE: ${DB_DEV_NAME}
-      POSTGRES_USER: ${DB_DEV_USER}
-      POSTGRES_PASSWORD: ${DB_DEV_PASSWORD}
-
-  adminer:
-    image: adminer
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
-      - 4002:8080
-    depens_on:
-      - db
+      - "${DB_PORT:3306"

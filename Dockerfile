@@ -4,11 +4,9 @@ WORKDIR /home/node/app
 
 COPY --chown=node . .
 
+RUN npm set unsafe-perm true
+
 RUN npm i --production
-
-RUN mkdir logs
-
-RUN mv .env.example .env
 
 CMD ["npm", "start"]
 
