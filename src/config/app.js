@@ -11,6 +11,7 @@ process.env.NODE_ENV =
   process.env.NODE_ENV || process.env.APP_ENV || "development";
 
 module.exports = {
+  env: process.env.NODE_ENV,
   port: parseInt(process.env.APP_PORT, 10) || 4444,
   logsDir: process.env.APP_LOGS_DIR || "logs"
 };
