@@ -1,3 +1,4 @@
+// @TODO: надо распилить этот файл
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -5,6 +6,7 @@ const helmet = require("helmet");
 
 const config = require("./config");
 const logger = require("./services/logger");
+const { sequelize } = require("./database/models");
 
 const app = express();
 
@@ -30,10 +32,21 @@ app.use((err, req, res, next) => {
   return next();
 });
 
-app
-  .listen(config.port, () => {
-    logger.info(`server listening on port: ${config.port}`);
+sequelize
+  .authenticate()
+  .then(() => {
+    logger.info("DB onnection has been established successfully.");
+    app
+      .listen(config.app.port, () => {
+        logger.info(`server listening on port: ${config.app.port}`);
+      })
+      .on("error", error => {
+        logger.error(error);
+        process.exit(1);
+      });
   })
-  .on("error", error => {
-    logger.error(error);
+  .catch(err => {
+    logger.error("Unable to connect to the database:", err);
+    sequelize.close();
+    process.exit(1);
   });
