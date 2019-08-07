@@ -12,6 +12,7 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     host: process.env.DB_HOSTNAME,
+    port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
     dialectOptions: {
       timezone: process.env.TIMEZONE
@@ -23,6 +24,7 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOSTNAME,
     dialect: process.env.DB_DIALECT,
+    port: process.env.DB_PORT,
     dialectOptions: {
       timezone: process.env.TIMEZONE
     }
