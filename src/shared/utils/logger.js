@@ -5,11 +5,11 @@ const config = require("../../config");
 
 const transports = [
   new winston.transports.File({
-    filename: path.resolve(config.app.logsDir, "error.log"),
+    filename: path.resolve(config.logsDir, "error.log"),
     level: "error"
   }),
   new winston.transports.File({
-    filename: path.resolve(config.app.logsDir, "combined.log")
+    filename: path.resolve(config.logsDir, "combined.log")
   })
 ];
 
@@ -25,8 +25,10 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-module.exports = winston.createLogger({
+const logger = winston.createLogger({
   level: "info",
   format: winston.format.json(),
   transports
 });
+
+module.exports = logger;
