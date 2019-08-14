@@ -5,7 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 
 const config = require("./config");
-const logger = require("./services/logger");
+const logger = require("./shared/utils/logger");
 
 const app = express();
 
@@ -32,8 +32,8 @@ app.use((err, req, res, next) => {
 });
 
 app
-  .listen(config.app.port, () => {
-    logger.info(`server listening on port: ${config.app.port}`);
+  .listen(config.port, () => {
+    logger.info(`server listening on port: ${config.port}`);
   })
   .on("error", error => {
     logger.error(error);
