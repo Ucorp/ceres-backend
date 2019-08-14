@@ -6,11 +6,10 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon src/server.js",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --verbose",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
-    "init-env": "node scripts/init-env",
-    "postinstall": "npx cpy-cli .env.example . --rename=.env --no-overwrite"
+    "create-env": "node scripts/create-env"
   },
   "repository": {
     "type": "git",
@@ -60,6 +59,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "helmet": "^3.20.0",
+    "randomstring": "^1.1.5",
     "winston": "^3.2.1"
   }
 }
