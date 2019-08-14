@@ -4,9 +4,9 @@
   "description": "API for Ceres project",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "test": "jest",
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "test": "cross-env NODE_ENV=test jest",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "init-env": "node scripts/init-env",
@@ -42,6 +42,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "cpy-cli": "^2.0.0",
+    "cross-env": "^5.2.0",
     "cz-customizable": "^6.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
