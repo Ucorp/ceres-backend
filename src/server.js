@@ -6,7 +6,6 @@ const helmet = require("helmet");
 
 const config = require("./config");
 const logger = require("./services/logger");
-const { sequelize } = require("./database/models");
 
 const app = express();
 
@@ -32,21 +31,11 @@ app.use((err, req, res, next) => {
   return next();
 });
 
-sequelize
-  .authenticate()
-  .then(() => {
-    logger.info("DB onnection has been established successfully.");
-    app
-      .listen(config.app.port, () => {
-        logger.info(`server listening on port: ${config.app.port}`);
-      })
-      .on("error", error => {
-        logger.error(error);
-        process.exit(1);
-      });
+app
+  .listen(config.app.port, () => {
+    logger.info(`server listening on port: ${config.app.port}`);
   })
-  .catch(err => {
-    logger.error("Unable to connect to the database:", err);
-    sequelize.close();
+  .on("error", error => {
+    logger.error(error);
     process.exit(1);
   });
