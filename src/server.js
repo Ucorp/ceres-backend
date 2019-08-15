@@ -3,8 +3,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
+const morgan = require("morgan");
+const { format } = require("date-fns");
+const chalk = require("chalk");
 
-const config = require("./config");
+const environments = require("./shared/constants/environments");
+const { env, port } = require("./config");
 const logger = require("./shared/utils/logger");
 
 const app = express();
@@ -12,6 +16,18 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
+
+if (env === environments.DEVELOPMENT) {
+  morgan.token("date", () => {
+    return format(new Date(), "DD-MM-YYYY H:mm:ss");
+  });
+
+  morgan.token("method", req => {
+    return chalk.cyan(req.method);
+  });
+
+  app.use(morgan(":date :method :url :status :res[content-length] - :response-time ms"));
+}
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -32,8 +48,8 @@ app.use((err, req, res, next) => {
 });
 
 app
-  .listen(config.port, () => {
-    logger.info(`server listening on port: ${config.port}`);
+  .listen(port, () => {
+    logger.info(`server listening on port: ${port}`);
   })
   .on("error", error => {
     logger.error(error);

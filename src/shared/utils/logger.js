@@ -1,34 +1,47 @@
 const path = require("path");
+
 const winston = require("winston");
+const chalk = require("chalk");
+const { format } = require("date-fns");
 
-const config = require("../../config");
+const { env, logsDir } = require("../../config");
+const environments = require("../constants/environments");
 
-const transports = [
-  new winston.transports.File({
-    filename: path.resolve(config.logsDir, "error.log"),
-    level: "error"
-  }),
-  new winston.transports.File({
-    filename: path.resolve(config.logsDir, "combined.log")
-  })
-];
+const IS_DEV = environments.DEVELOPMENT === env;
 
-//
-// If we're not in production then log to the `console` with the format:
-// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
-//
-if (process.env.NODE_ENV !== "production") {
-  transports.push(
-    new winston.transports.Console({
-      format: winston.format.simple()
-    })
-  );
-}
+const customLevelMessage = (level, isDev) => {
+  if (isDev) {
+    return level === "error" ? chalk.red(level) : chalk.green(level);
+  }
 
-const logger = winston.createLogger({
-  level: "info",
-  format: winston.format.json(),
-  transports
+  return level;
+};
+
+const customFormat = winston.format.printf(info => {
+  const timestamp = format(info.timestamp, "DD-MM-YYYY H:mm:ss");
+  const level = customLevelMessage(info.level, IS_DEV);
+
+  return `${timestamp} ${level}: ${info.message}`;
 });
 
-module.exports = logger;
+const transports = [];
+
+if (!IS_DEV) {
+  transports.push(
+    new winston.transports.File({
+      filename: path.resolve(logsDir, "error.log"),
+      level: "error"
+    }),
+    new winston.transports.File({
+      filename: path.resolve(logsDir, "combined.log")
+    }),
+    new winston.transports.Console({ level: "info" })
+  );
+} else {
+  transports.push(new winston.transports.Console());
+}
+
+module.exports = winston.createLogger({
+  format: winston.format.combine(winston.format.timestamp(), customFormat),
+  transports
+});
