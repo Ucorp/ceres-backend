@@ -10,7 +10,8 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "create-env": "node scripts/create-env",
-    "knex": "cross-env NODE_ENV=development knex"
+    "knex": "cross-env NODE_ENV=development knex",
+    "postinstall": "npm run create-env"
   },
   "repository": {
     "type": "git",
