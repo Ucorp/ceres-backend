@@ -11,6 +11,8 @@ const environments = require("./shared/constants/environments");
 const { env } = require("./config");
 const errorsHandler = require("./shared/errors-handler");
 
+const { userModule } = require("./modules");
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -28,6 +30,9 @@ if (env === environments.DEVELOPMENT) {
 
   app.use(morgan(":date :method :url :status :res[content-length] - :response-time ms"));
 }
+
+// Modules
+app.use("/api/v1", userModule);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
