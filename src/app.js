@@ -5,9 +5,11 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const { format } = require("date-fns");
 const chalk = require("chalk");
+const { NotFoundError } = require("objection");
 
 const environments = require("./shared/constants/environments");
 const { env } = require("./config");
+const errorsHandler = require("./shared/errors-handler");
 
 const app = express();
 
@@ -29,20 +31,14 @@ if (env === environments.DEVELOPMENT) {
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new Error("Not Found");
-  err.status = 404;
+  const err = new NotFoundError();
   next(err);
 });
 
 // / error handlers
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.json({
-    errors: {
-      message: err.message
-    }
-  });
-  return next();
+  errorsHandler(err, res);
+  next();
 });
 
 module.exports = app;
