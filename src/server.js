@@ -9,7 +9,8 @@ dbConnector
     logger.info(`connected to db server on: ${dbHost}:${dbPort}`);
 
     app
-      .listen(port, () => {
+      .listen(port)
+      .on("listening", () => {
         logger.info(`server listening on port: ${port}`);
       })
       .on("error", error => {
