@@ -58,7 +58,8 @@ module.exports = {
 
   // Возможность задать спец ОБЛАСТЬ для определенного типа коммита (пример для 'fix')
   scopeOverrides: {
-    fix: [{ name: "style" }, { name: "e2eTest" }, { name: "unitTest" }]
+    fix: [{ name: "style" }, { name: "e2eTest" }, { name: "unitTest" }],
+    chore: [{ name: "deps" }, { name: "toolchain" }]
   },
 
   // Поменяем дефолтные вопросы
