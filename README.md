@@ -1,5 +1,7 @@
 # Ceres
 
+[![CircleCI](https://circleci.com/gh/multiplayground/ceres-backend/tree/develop.svg?style=svg)](https://circleci.com/gh/multiplayground/ceres-backend/tree/develop)
+
 Проект для автоматизации работы диспетчерской службы в части планирования закупок и ведению учета имеющегося инвентаря.
 
 Реализация серверной части проекта. Клиенткая часть находится по адресу [https://github.com/multiplayground/ceres-frontend](https://github.com/multiplayground/ceres-frontend)
