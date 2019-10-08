@@ -2,7 +2,7 @@ const path = require("path");
 
 const winston = require("winston");
 const chalk = require("chalk");
-const { format } = require("date-fns");
+const { format, parseISO } = require("date-fns");
 
 const { env, logsDir } = require("../../config");
 const environments = require("../constants/environments");
@@ -18,7 +18,7 @@ const customLevelMessage = (level, isDev) => {
 };
 
 const customFormat = winston.format.printf(info => {
-  const timestamp = format(info.timestamp, "DD-MM-YYYY H:mm:ss");
+  const timestamp = format(parseISO(new Date(info.timestamp).toISOString()), "dd-MM-yyyy H:mm:ss");
   const level = customLevelMessage(info.level, IS_DEV);
 
   return `${timestamp} ${level}: ${info.message}`;
