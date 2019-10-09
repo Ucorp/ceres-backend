@@ -1,6 +1,6 @@
 const app = require("./app");
 const { port, dbHost, dbPort } = require("./config");
-const logger = require("./shared/utils/logger");
+const logger = require("./core/utils/logger");
 const dbConnector = require("./database/connectors/db-connector");
 
 dbConnector

@@ -7,9 +7,9 @@ const { format } = require("date-fns");
 const chalk = require("chalk");
 const { NotFoundError } = require("objection");
 
-const environments = require("./shared/constants/environments");
+const environments = require("./core/constants/environments");
 const { env } = require("./config");
-const errorsHandler = require("./shared/errors-handler");
+const errorsHandler = require("./core/errors-handler");
 
 const { userModule } = require("./modules");
 

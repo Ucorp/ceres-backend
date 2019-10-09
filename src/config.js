@@ -2,9 +2,9 @@ const { resolve } = require("path");
 
 const dotenv = require("dotenv");
 
-const environments = require("./shared/constants/environments");
-const getCurrentEnvironment = require("./shared/utils/current-environment");
-const normalizePort = require("./shared/utils/normalize-port");
+const environments = require("./core/constants/environments");
+const getCurrentEnvironment = require("./core/utils/current-environment");
+const normalizePort = require("./core/utils/normalize-port");
 
 const currentEnvironment = getCurrentEnvironment();
 const isValidEnvironment = Object.prototype.hasOwnProperty.call(
