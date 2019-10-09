@@ -21,7 +21,7 @@ app.use(helmet());
 
 if (env === environments.DEVELOPMENT) {
   morgan.token("date", () => {
-    return format(Date.now(), "DD-MM-YYYY H:mm:ss");
+    return format(Date.now(), "dd-MM-yyyy H:mm:ss");
   });
 
   morgan.token("method", req => {
