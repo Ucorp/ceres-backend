@@ -1,4 +1,4 @@
-const BaseModel = require("../../shared/base-model");
+const BaseModel = require("../../core/base-model");
 
 class User extends BaseModel {
   static get tableName() {
