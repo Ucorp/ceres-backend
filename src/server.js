@@ -1,6 +1,6 @@
 const app = require("./app");
 const { port, dbHost, dbPort } = require("./config");
-const logger = require("./shared/utils/logger");
+const logger = require("./core/utils/logger");
 const dbConnector = require("./database/connectors/db-connector");
 
 dbConnector
@@ -9,7 +9,8 @@ dbConnector
     logger.info(`connected to db server on: ${dbHost}:${dbPort}`);
 
     app
-      .listen(port, () => {
+      .listen(port)
+      .on("listening", () => {
         logger.info(`server listening on port: ${port}`);
       })
       .on("error", error => {
