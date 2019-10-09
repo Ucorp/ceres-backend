@@ -11,7 +11,7 @@ const environments = require("./core/constants/environments");
 const { env } = require("./config");
 const errorsHandler = require("./core/errors-handler");
 
-const { userModule } = require("./modules");
+const { userModule } = require("./features");
 
 const app = express();
 
